@@ -29,7 +29,18 @@
 ##  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ##
 
-{.pragma: wepoll, header: "wepoll.h".}
+
+import os
+
+
+{.compile: "wepoll.c".}
+
+const header_file = currentSourcePath().splitPath.head / "wepoll.h"
+
+{.pragma: wepoll, header: header_file.}
+{.passL: "-lws2_32".}
+
+
 
 type
   EPOLL_EVENTS* = enum
@@ -53,7 +64,7 @@ type
   HANDLE* = pointer
   SOCKET* = uintptr_t
   epoll_data_t* {.bycopy, union.} = object
-    `ptr`*: pointer
+    p*: pointer
     fd*: cint
     u32*: uint32_t
     u64*: uint64_t
