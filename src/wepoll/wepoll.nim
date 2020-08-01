@@ -61,7 +61,7 @@ type
   uint32_t = uint32
   uint64_t = uint64
 
-  HANDLE* = pointer
+  EpollHandle* = pointer
   SOCKET* = uintptr_t
   epoll_data_t* {.bycopy, union.} = object
     p*: pointer
@@ -69,19 +69,19 @@ type
     u32*: uint32_t
     u64*: uint64_t
     sock*: SOCKET              ##  Windows specific
-    hnd*: HANDLE               ##  Windows specific
+    hnd*: EpollHandle               ##  Windows specific
 
   epoll_event* {.bycopy.} = object
     events*: uint32_t          ##  Epoll events and flags
     data*: epoll_data_t        ##  User data variable
 
 
-proc epoll_create*(size: cint): HANDLE {.wepoll.}
+proc epoll_create*(size: cint): EpollHandle {.wepoll.}
 
-proc epoll_create1*(flags: cint): HANDLE {.wepoll.}
+proc epoll_create1*(flags: cint): EpollHandle {.wepoll.}
 
-proc epoll_close*(ephnd: HANDLE): cint {.wepoll.}
+proc epoll_close*(ephnd: EpollHandle): cint {.wepoll.}
 
-proc epoll_ctl*(ephnd: HANDLE; op: cint; sock: SOCKET; event: ptr epoll_event): cint {.wepoll.}
+proc epoll_ctl*(ephnd: EpollHandle; op: cint; sock: SOCKET; event: ptr epoll_event): cint {.wepoll.}
 
-proc epoll_wait*(ephnd: HANDLE; events: ptr epoll_event; maxevents: cint; timeout: cint): cint {.wepoll.}
+proc epoll_wait*(ephnd: EpollHandle; events: ptr epoll_event; maxevents: cint; timeout: cint): cint {.wepoll.}

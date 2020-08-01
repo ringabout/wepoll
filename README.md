@@ -63,7 +63,7 @@ proc epoll_ctl*(ephnd: HANDLE; op: cint;
 
 ### epoll_wait
 
-```c
+```nim
 proc epoll_wait*(ephnd: HANDLE; 
                  events: ptr epoll_event; 
                  maxevents: cint; 
