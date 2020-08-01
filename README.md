@@ -8,7 +8,7 @@ Docs from https://github.com/piscisaureus/wepoll
 
 ### General remarks
 
-* The epoll port is a `HANDLE`, not a file descriptor.
+* The epoll port is a `EpollHandle`, not a file descriptor.
 * All functions set both `errno` and `GetLastError()` on failure.
 * For more extensive documentation, see the [epoll(7) man page][man epoll],
   and the per-function man pages that are linked below.
@@ -16,8 +16,8 @@ Docs from https://github.com/piscisaureus/wepoll
 ### epoll_create/epoll_create1
 
 ```nim
-proc epoll_create*(size: cint): HANDLE
-proc epoll_create1*(flags: cint): HANDLE
+proc epoll_create*(size: cint): EpollHandle
+proc epoll_create1*(flags: cint): EpollHandle
 ```
 
 * Create a new epoll instance (port).
@@ -29,7 +29,7 @@ proc epoll_create1*(flags: cint): HANDLE
 ### epoll_close
 
 ```nim
-proc epoll_close*(ephnd: HANDLE): cint
+proc epoll_close*(ephnd: EpollHandle): cint
 ```
 
 * Close an epoll port.
@@ -39,12 +39,12 @@ proc epoll_close*(ephnd: HANDLE): cint
 ### epoll_ctl
 
 ```nim
-proc epoll_ctl*(ephnd: HANDLE; op: cint; 
+proc epoll_ctl*(ephnd: EpollHandle; op: cint; 
                 sock: SOCKET; event: ptr epoll_event): cint
 ```
 
 * Control which socket events are monitored by an epoll port.
-* `ephnd` must be a HANDLE created by
+* `ephnd` must be a EpollHandle created by
   [`epoll_create()`](#epoll_createepoll_create1) or
   [`epoll_create1()`](#epoll_createepoll_create1).
 * `op` must be one of `EPOLL_CTL_ADD`, `EPOLL_CTL_MOD`, `EPOLL_CTL_DEL`.
@@ -64,7 +64,7 @@ proc epoll_ctl*(ephnd: HANDLE; op: cint;
 ### epoll_wait
 
 ```nim
-proc epoll_wait*(ephnd: HANDLE; 
+proc epoll_wait*(ephnd: EpollHandle; 
                  events: ptr epoll_event; 
                  maxevents: cint; 
                  timeout: cint): cint
@@ -107,13 +107,13 @@ type
     u32*: uint32_t
     u64*: uint64_t
     sock*: SOCKET              ##  Windows specific
-    hnd*: EpollHandle               ##  Windows specific
+    hnd*: EpollHandle          ##  Windows specific
 ```
 
 ```nim
 type
   EpollEvent* {.bycopy.} = object
-    events*: uint32_t          ##  Epoll events and flags
+    events*: uint32_t       ##  Epoll events and flags
     data*: EpollData        ##  User data variable
 ```
 
