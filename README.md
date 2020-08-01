@@ -50,7 +50,7 @@ proc epoll_ctl*(ephnd: HANDLE; op: cint;
 * `op` must be one of `EPOLL_CTL_ADD`, `EPOLL_CTL_MOD`, `EPOLL_CTL_DEL`.
 * `sock` must be a valid socket created by [`socket()`][msdn socket],
   [`WSASocket()`][msdn wsasocket], or [`accept()`][msdn accept].
-* `event` should be a pointer to a [`struct epoll_event`](#struct-epoll_event).<br>
+* `event` should be a pointer to a [`epoll_event`](#object-epoll_event).<br>
   If `op` is `EPOLL_CTL_DEL` then the `event` parameter is ignored, and it
   may be `NULL`.
 * Returns 0 on success, -1 on failure.
@@ -72,7 +72,7 @@ proc epoll_wait*(ephnd: HANDLE;
 
 * Receive socket events from an epoll port.
 * `events` should point to a caller-allocated array of
-  [`epoll_event`](#-epoll_event) structs, which will receive the
+  [`epoll_event`](#object-epoll_event) object, which will receive the
   reported events.
 * `maxevents` is the maximum number of events that will be written to the
   `events` array, and must be greater than zero.

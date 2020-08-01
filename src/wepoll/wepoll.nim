@@ -41,7 +41,6 @@ const header_file = currentSourcePath().splitPath.head / "wepoll.h"
 {.passL: "-lws2_32".}
 
 
-
 type
   EPOLL_EVENTS* = enum
     EPOLLIN = (int)(1 shl 0), EPOLLPRI = (int)(1 shl 1), EPOLLOUT = (int)(1 shl 2),
@@ -56,6 +55,7 @@ const
   EPOLL_CTL_MOD* = 2
   EPOLL_CTL_DEL* = 3
 
+
 type
   uintptr_t = culonglong
   uint32_t = uint32
@@ -63,7 +63,7 @@ type
 
   EpollHandle* = pointer
   SOCKET* = uintptr_t
-  epoll_data_t* {.bycopy, union.} = object
+  EpollData* {.bycopy, union.} = object
     p*: pointer
     fd*: cint
     u32*: uint32_t
@@ -71,9 +71,9 @@ type
     sock*: SOCKET              ##  Windows specific
     hnd*: EpollHandle               ##  Windows specific
 
-  epoll_event* {.bycopy.} = object
+  EpollEvent* {.bycopy.} = object
     events*: uint32_t          ##  Epoll events and flags
-    data*: epoll_data_t        ##  User data variable
+    data*: EpollData           ##  User data variable
 
 
 proc epoll_create*(size: cint): EpollHandle {.wepoll.}
@@ -82,6 +82,6 @@ proc epoll_create1*(flags: cint): EpollHandle {.wepoll.}
 
 proc epoll_close*(ephnd: EpollHandle): cint {.wepoll.}
 
-proc epoll_ctl*(ephnd: EpollHandle; op: cint; sock: SOCKET; event: ptr epoll_event): cint {.wepoll.}
+proc epoll_ctl*(ephnd: EpollHandle; op: cint; sock: SOCKET; event: ptr EpollEvent): cint {.wepoll.}
 
-proc epoll_wait*(ephnd: EpollHandle; events: ptr epoll_event; maxevents: cint; timeout: cint): cint {.wepoll.}
+proc epoll_wait*(ephnd: EpollHandle; events: ptr EpollEvent; maxevents: cint; timeout: cint): cint {.wepoll.}
