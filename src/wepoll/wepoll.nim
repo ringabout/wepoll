@@ -62,7 +62,9 @@ type
   uint64_t = uint64
 
   EpollHandle* = pointer
+
   SOCKET* = uintptr_t
+
   EpollData* {.bycopy, union.} = object
     p*: pointer
     fd*: cint

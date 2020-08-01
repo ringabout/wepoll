@@ -90,6 +90,17 @@ proc epoll_wait*(ephnd: HANDLE;
 
 ```nim
 type
+  uintptr_t = culonglong
+  uint32_t = uint32
+  uint64_t = uint64
+
+  EpollHandle* = pointer
+
+  SOCKET* = uintptr_t
+```
+
+```nim
+type
   EpollData* {.bycopy, union.} = object
     p*: pointer
     fd*: cint
