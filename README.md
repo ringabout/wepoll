@@ -72,7 +72,7 @@ proc epoll_wait*(ephnd: HANDLE;
 
 * Receive socket events from an epoll port.
 * `events` should point to a caller-allocated array of
-  [`epoll_event`](#struct-epoll_event) structs, which will receive the
+  [`epoll_event`](#-epoll_event) structs, which will receive the
   reported events.
 * `maxevents` is the maximum number of events that will be written to the
   `events` array, and must be greater than zero.
@@ -86,7 +86,7 @@ proc epoll_wait*(ephnd: HANDLE;
   - `≥1` the number of events stored in the `events` buffer
 * [Linux man page][man epoll_wait]
 
-### struct epoll_event
+### object epoll_event
 
 ```nim
 type
