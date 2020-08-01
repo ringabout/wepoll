@@ -38,7 +38,7 @@ proc epoll_close*(ephnd: HANDLE): cint
 
 ### epoll_ctl
 
-```c
+```nim
 proc epoll_ctl*(ephnd: HANDLE; op: cint; 
                 sock: SOCKET; event: ptr epoll_event): cint
 ```
