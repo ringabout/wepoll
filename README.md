@@ -139,3 +139,16 @@ type
 <sup>1</sup>: the `EPOLLERR` and `EPOLLHUP` events may always be reported by
 [`epoll_wait()`](#epoll_wait), regardless of the event mask that was passed to
 [`epoll_ctl()`](#epoll_ctl).
+
+
+[man epoll]:        http://man7.org/linux/man-pages/man7/epoll.7.html
+[man epoll_create]: http://man7.org/linux/man-pages/man2/epoll_create.2.html
+[man epoll_ctl]:    http://man7.org/linux/man-pages/man2/epoll_ctl.2.html
+[man epoll_wait]:   http://man7.org/linux/man-pages/man2/epoll_wait.2.html
+[msdn accept]:      https://msdn.microsoft.com/en-us/library/windows/desktop/ms737526(v=vs.85).aspx
+[msdn socket]:      https://msdn.microsoft.com/en-us/library/windows/desktop/ms740506(v=vs.85).aspx
+[msdn wsasocket]:   https://msdn.microsoft.com/en-us/library/windows/desktop/ms742212(v=vs.85).aspx
+[select scale]:     https://daniel.haxx.se/docs/poll-vs-select.html
+[wsapoll broken]:   https://daniel.haxx.se/blog/2012/10/10/wsapoll-is-broken/
+[wepoll.c]:         https://github.com/piscisaureus/wepoll/blob/dist/wepoll.c
+[wepoll.h]:         https://github.com/piscisaureus/wepoll/blob/dist/wepoll.h
