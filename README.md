@@ -90,7 +90,7 @@ proc epoll_wait*(ephnd: HANDLE;
 
 ```nim
 type
-  epoll_data_t* {.bycopy, union.} = object
+  EpollData* {.bycopy, union.} = object
     p*: pointer
     fd*: cint
     u32*: uint32_t
@@ -101,9 +101,9 @@ type
 
 ```nim
 type
-  epoll_event* {.bycopy.} = object
+  EpollEvent* {.bycopy.} = object
     events*: uint32_t          ##  Epoll events and flags
-    data*: epoll_data_t        ##  User data variable
+    data*: EpollData        ##  User data variable
 ```
 
 * The `events` field is a bit mask containing the events being
