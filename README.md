@@ -107,7 +107,7 @@ type
     u32*: uint32_t
     u64*: uint64_t
     sock*: SOCKET              ##  Windows specific
-    hnd*: HANDLE               ##  Windows specific
+    hnd*: EpollHandle               ##  Windows specific
 ```
 
 ```nim
