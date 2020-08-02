@@ -57,9 +57,9 @@ const
 
 
 type
-  uintptr_t = culonglong
-  uint32_t = uint32
-  uint64_t = uint64
+  uintptr_t* = culonglong
+  uint32_t* = uint32
+  uint64_t* = uint64
 
   EpollHandle* = pointer
 
@@ -71,7 +71,7 @@ type
     u32*: uint32_t
     u64*: uint64_t
     sock*: SOCKET              ##  Windows specific
-    hnd*: EpollHandle               ##  Windows specific
+    hnd*: EpollHandle          ##  Windows specific
 
   EpollEvent* {.bycopy.} = object
     events*: uint32_t          ##  Epoll events and flags
@@ -84,6 +84,6 @@ proc epoll_create1*(flags: cint): EpollHandle {.wepoll.}
 
 proc epoll_close*(ephnd: EpollHandle): cint {.wepoll.}
 
-proc epoll_ctl*(ephnd: EpollHandle; op: cint; sock: SOCKET; event: ptr EpollEvent): cint {.wepoll.}
+proc epoll_ctl*(ephnd: EpollHandle, op: cint, sock: SOCKET, event: ptr EpollEvent): cint {.wepoll.}
 
-proc epoll_wait*(ephnd: EpollHandle; events: ptr EpollEvent; maxevents: cint; timeout: cint): cint {.wepoll.}
+proc epoll_wait*(ephnd: EpollHandle, events: ptr EpollEvent, maxevents: cint, timeout: cint): cint {.wepoll.}

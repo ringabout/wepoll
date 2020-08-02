@@ -39,8 +39,8 @@ proc epoll_close*(ephnd: EpollHandle): cint
 ### epoll_ctl
 
 ```nim
-proc epoll_ctl*(ephnd: EpollHandle; op: cint; 
-                sock: SOCKET; event: ptr epoll_event): cint
+proc epoll_ctl*(ephnd: EpollHandle, op: cint, 
+                sock: SOCKET, event: ptr epoll_event): cint
 ```
 
 * Control which socket events are monitored by an epoll port.
@@ -64,9 +64,9 @@ proc epoll_ctl*(ephnd: EpollHandle; op: cint;
 ### epoll_wait
 
 ```nim
-proc epoll_wait*(ephnd: EpollHandle; 
-                 events: ptr epoll_event; 
-                 maxevents: cint; 
+proc epoll_wait*(ephnd: EpollHandle,
+                 events: ptr epoll_event,
+                 maxevents: cint,
                  timeout: cint): cint
 ```
 
@@ -90,9 +90,9 @@ proc epoll_wait*(ephnd: EpollHandle;
 
 ```nim
 type
-  uintptr_t = culonglong
-  uint32_t = uint32
-  uint64_t = uint64
+  uintptr_t* = culonglong
+  uint32_t* = uint32
+  uint64_t* = uint64
 
   EpollHandle* = pointer
 
