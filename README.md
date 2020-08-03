@@ -1,6 +1,12 @@
 # wepoll
 Windows epoll wrapper based on [wepoll](https://github.com/piscisaureus/wepoll)
 
+## Installation
+
+```
+nimble install wepoll
+```
+
 
 ## API
 
