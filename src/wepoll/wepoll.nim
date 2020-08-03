@@ -80,6 +80,8 @@ proc epoll_create1*(flags: cint): EpollHandle {.wepoll.}
 
 proc epoll_close*(ephnd: EpollHandle): cint {.wepoll.}
 
-proc epoll_ctl*(ephnd: EpollHandle, op: cint, sock: SOCKET, event: ptr EpollEvent): cint {.wepoll.}
+proc epoll_ctl*(ephnd: EpollHandle, op: cint, 
+                sock: SOCKET, event: ptr EpollEvent): cint {.wepoll.}
 
-proc epoll_wait*(ephnd: EpollHandle, events: ptr EpollEvent, maxevents: cint, timeout: cint): cint {.wepoll.}
+proc epoll_wait*(ephnd: EpollHandle, events: ptr EpollEvent, 
+                 maxevents: cint, timeout: cint): cint {.wepoll.}
