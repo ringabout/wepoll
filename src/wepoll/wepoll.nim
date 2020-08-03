@@ -59,19 +59,19 @@ const
 type
   EpollHandle* = pointer
 
-  SOCKET* = culonglong
+  Socket* = culonglong
 
   EpollData* {.bycopy, union.} = object
     p*: pointer
     fd*: cint
     u32*: uint32
     u64*: uint64
-    sock*: SOCKET              ##  Windows specific
+    sock*: Socket              ##  Windows specific
     hnd*: EpollHandle          ##  Windows specific
 
   EpollEvent* {.bycopy.} = object
     events*: uint32          ##  Epoll events and flags
-    data*: EpollData           ##  User data variable
+    data*: EpollData         ##  User data variable
 
 
 proc epoll_create*(size: cint): EpollHandle {.wepoll.}

@@ -90,13 +90,9 @@ proc epoll_wait*(ephnd: EpollHandle,
 
 ```nim
 type
-  uintptr_t* = culonglong
-  uint32_t* = uint32
-  uint64_t* = uint64
-
   EpollHandle* = pointer
 
-  SOCKET* = uintptr_t
+  Socket* = culonglong
 ```
 
 ```nim
@@ -104,17 +100,17 @@ type
   EpollData* {.bycopy, union.} = object
     p*: pointer
     fd*: cint
-    u32*: uint32_t
-    u64*: uint64_t
-    sock*: SOCKET              ##  Windows specific
+    u32*: uint32
+    u64*: uint64
+    sock*: Socket              ##  Windows specific
     hnd*: EpollHandle          ##  Windows specific
 ```
 
 ```nim
 type
   EpollEvent* {.bycopy.} = object
-    events*: uint32_t       ##  Epoll events and flags
-    data*: EpollData        ##  User data variable
+    events*: uint32          ##  Epoll events and flags
+    data*: EpollData         ##  User data variable
 ```
 
 * The `events` field is a bit mask containing the events being
