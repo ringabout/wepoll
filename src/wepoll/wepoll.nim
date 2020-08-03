@@ -57,24 +57,20 @@ const
 
 
 type
-  uintptr_t* = culonglong
-  uint32_t* = uint32
-  uint64_t* = uint64
-
   EpollHandle* = pointer
 
-  SOCKET* = uintptr_t
+  SOCKET* = culonglong
 
   EpollData* {.bycopy, union.} = object
     p*: pointer
     fd*: cint
-    u32*: uint32_t
-    u64*: uint64_t
+    u32*: uint32
+    u64*: uint64
     sock*: SOCKET              ##  Windows specific
     hnd*: EpollHandle          ##  Windows specific
 
   EpollEvent* {.bycopy.} = object
-    events*: uint32_t          ##  Epoll events and flags
+    events*: uint32          ##  Epoll events and flags
     data*: EpollData           ##  User data variable
 
 
