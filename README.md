@@ -56,7 +56,7 @@ proc epoll_ctl*(ephnd: EpollHandle, op: cint,
 * `op` must be one of `EPOLL_CTL_ADD`, `EPOLL_CTL_MOD`, `EPOLL_CTL_DEL`.
 * `sock` must be a valid socket created by [`socket()`][msdn socket],
   [`WSASocket()`][msdn wsasocket], or [`accept()`][msdn accept].
-* `event` should be a pointer to a [`epoll_event`](#object-epoll_event).<br>
+* `event` should be a pointer to a [`EpollEvent`](#object-EpollEvent).<br>
   If `op` is `EPOLL_CTL_DEL` then the `event` parameter is ignored, and it
   may be `NULL`.
 * Returns 0 on success, -1 on failure.
@@ -70,15 +70,13 @@ proc epoll_ctl*(ephnd: EpollHandle, op: cint,
 ### epoll_wait
 
 ```nim
-proc epoll_wait*(ephnd: EpollHandle,
-                 events: ptr epoll_event,
-                 maxevents: cint,
-                 timeout: cint): cint
+proc epoll_wait*(ephnd: EpollHandle, events: ptr EpollEvent, 
+                 maxevents: cint, timeout: cint): cint {.wepoll.}
 ```
 
 * Receive socket events from an epoll port.
 * `events` should point to a caller-allocated array of
-  [`epoll_event`](#object-epoll_event) object, which will receive the
+  [`EpollEvent`](#object-EpollEvent) object, which will receive the
   reported events.
 * `maxevents` is the maximum number of events that will be written to the
   `events` array, and must be greater than zero.
@@ -92,7 +90,7 @@ proc epoll_wait*(ephnd: EpollHandle,
   - `≥1` the number of events stored in the `events` buffer
 * [Linux man page][man epoll_wait]
 
-### object epoll_event
+### object EpollEvent
 
 ```nim
 type
