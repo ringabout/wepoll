@@ -59,14 +59,14 @@ const
 type
   EpollHandle* = pointer
 
-  Socket* = culonglong
+  EpollSocket* = culonglong
 
   EpollData* {.bycopy, union.} = object
     p*: pointer
     fd*: cint
     u32*: uint32
     u64*: uint64
-    sock*: Socket              ##  Windows specific
+    sock*: EpollSocket              ##  Windows specific
     hnd*: EpollHandle          ##  Windows specific
 
   EpollEvent* {.bycopy.} = object
