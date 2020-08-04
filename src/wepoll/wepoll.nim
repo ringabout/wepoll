@@ -66,7 +66,7 @@ type
     fd*: cint
     u32*: uint32
     u64*: uint64
-    sock*: EpollSocket              ##  Windows specific
+    sock*: EpollSocket         ##  Windows specific
     hnd*: EpollHandle          ##  Windows specific
 
   EpollEvent* {.bycopy.} = object
@@ -81,7 +81,7 @@ proc epoll_create1*(flags: cint): EpollHandle {.wepoll.}
 proc epoll_close*(ephnd: EpollHandle): cint {.wepoll.}
 
 proc epoll_ctl*(ephnd: EpollHandle, op: cint, 
-                sock: SOCKET, event: ptr EpollEvent): cint {.wepoll.}
+                sock: EpollSocket, event: ptr EpollEvent): cint {.wepoll.}
 
 proc epoll_wait*(ephnd: EpollHandle, events: ptr EpollEvent, 
                  maxevents: cint, timeout: cint): cint {.wepoll.}

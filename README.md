@@ -46,7 +46,7 @@ proc epoll_close*(ephnd: EpollHandle): cint
 
 ```nim
 proc epoll_ctl*(ephnd: EpollHandle, op: cint, 
-                sock: SOCKET, event: ptr epoll_event): cint
+                sock: EpollSocket, event: ptr EpollEvent): cint {.wepoll.}
 ```
 
 * Control which socket events are monitored by an epoll port.
@@ -98,7 +98,7 @@ proc epoll_wait*(ephnd: EpollHandle,
 type
   EpollHandle* = pointer
 
-  Socket* = culonglong
+  EpollSocket* = culonglong
 ```
 
 ```nim
@@ -108,7 +108,7 @@ type
     fd*: cint
     u32*: uint32
     u64*: uint64
-    sock*: Socket              ##  Windows specific
+    sock*: EpollSocket         ##  Windows specific
     hnd*: EpollHandle          ##  Windows specific
 ```
 
